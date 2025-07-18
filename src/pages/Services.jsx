@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import EnquiryFormModal from '../components/EnquiryFormModal';
+import { useNavigate } from 'react-router-dom';
 
 const services = [
   { title: 'Solar Projects', desc: 'Residential, Commercial, Utility Scale. We provide complete solar project solutions from design and engineering to installation and maintenance, ensuring maximum efficiency and reliability for all types of clients.', image: 'https://images.pexels.com/photos/8853502/pexels-photo-8853502.jpeg' },
@@ -24,17 +25,7 @@ function truncateText(text, maxLength) {
 }
 
 const Services = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [modalService, setModalService] = useState(null);
-
-  const handleEnquiry = (service) => {
-    setModalService(service);
-    setShowModal(true);
-  };
-  const closeModal = () => {
-    setShowModal(false);
-    setModalService(null);
-  };
+  const navigate = useNavigate();
 
   return (
     <div className="pt-20 pb-12 px-4 min-h-screen bg-white">
@@ -66,8 +57,8 @@ const Services = () => {
                   {truncateText(service.desc, 60)}
                 </p>
                 <button
-                  className="mt-4 px-4 py-2 rounded-full bg-orange-500 text-white font-bold border-2 border-orange-500 transition-all duration-300 text-sm text-center hover:bg-black hover:text-white hover:border-black focus:scale-105 active:scale-95 hover:shadow-lg hover:scale-105"
-                  onClick={() => handleEnquiry(service)}
+                  className="mt-4 px-4 py-2 rounded-full bg-darkred text-white font-bold border-2 border-darkred transition-all duration-300 text-sm text-center hover:bg-black hover:text-white hover:border-black focus:scale-105 active:scale-95 hover:shadow-lg hover:scale-105"
+                  onClick={() => navigate(`/enquiry?item=${encodeURIComponent(service.title)}`)}
                 >
                   Enquiry
                 </button>
@@ -75,9 +66,6 @@ const Services = () => {
             </motion.div>
           ))}
         </div>
-        {showModal && (
-          <EnquiryFormModal open={showModal} onClose={closeModal} item={modalService} />
-        )}
       </div>
     </div>
   );

@@ -14,11 +14,12 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 100);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -26,7 +27,7 @@ const Navbar = () => {
 
   // Decide background
   const isHome = location.pathname === '/';
-  const showDarkBg = isScrolled || !isHome;
+  const showDarkBg = !isHome || isScrolled;
 
   // Animation variants matching Hero section style
   const navContainerVariants = {
@@ -97,7 +98,7 @@ const Navbar = () => {
     <motion.nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
         showDarkBg
-          ? 'bg-[#001933] backdrop-blur-md shadow-lg border-b border-[#001933]'
+          ? 'bg-white backdrop-blur-md shadow-lg border-b border-white'
           : 'bg-white/10 backdrop-blur-lg'
       }`}
       variants={navContainerVariants}
@@ -105,13 +106,13 @@ const Navbar = () => {
       animate="visible"
     >
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-24">
           {/* Logo */}
           <motion.div
             className="flex items-center"
             variants={logoVariants}
           >
-            <img src="/logo2.jpg" alt="Solwave Logo" className="h-16 w-16 rounded-full shadow-none object-cover" />
+            <img src="/l1.png" alt="Solwave Logo" style={{ height: '12rem', width: '24rem' }} className="mt-10 p-2 -ml-14 rounded-full shadow-none object-cover" />
           </motion.div>
 
           {/* Desktop Navigation */}
@@ -132,8 +133,8 @@ const Navbar = () => {
                     className={({ isActive }) =>
                       `px-6 py-2 font-semibold text-lg transition-colors duration-200 select-none ${
                         isActive
-                          ? 'text-[#ff9800] hover:bg-gradient-to-r hover:from-[#ff9800] hover:to-[#ffd700] hover:bg-clip-text hover:text-transparent'
-                          : 'text-white hover:bg-gradient-to-r hover:from-[#ff9800] hover:to-[#ffd700] hover:bg-clip-text hover:text-transparent'
+                          ? 'text-[#ff9800] hover:!text-orange-500 hover:bg-gradient-to-r hover:from-[#ff9800] hover:to-[#ffd700] hover:bg-clip-text hover:text-transparent'
+                          : 'text-black hover:!text-orange-500 hover:bg-gradient-to-r hover:from-[#ff9800] hover:to-[#ffd700] hover:bg-clip-text hover:text-transparent'
                       }`
                     }
                   >
@@ -153,8 +154,8 @@ const Navbar = () => {
                   className={({ isActive }) =>
                     `px-6 py-2 font-semibold text-lg transition-colors duration-200 select-none ${
                       isActive
-                        ? 'text-[#ff9800] hover:bg-gradient-to-r hover:from-[#ff9800] hover:to-[#ffd700] hover:bg-clip-text hover:text-transparent'
-                        : 'text-white hover:bg-gradient-to-r hover:from-[#ff9800] hover:to-[#ffd700] hover:bg-clip-text hover:text-transparent'
+                        ? 'text-[#ff9800] hover:!text-orange-500 hover:bg-gradient-to-r hover:from-[#ff9800] hover:to-[#ffd700] hover:bg-clip-text hover:text-transparent'
+                        : 'text-black hover:!text-orange-500 hover:bg-gradient-to-r hover:from-[#ff9800] hover:to-[#ffd700] hover:bg-clip-text hover:text-transparent'
                     }`
                   }
                 >
@@ -208,7 +209,7 @@ const Navbar = () => {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              className="md:hidden absolute top-full left-0 w-full bg-[#001933] backdrop-blur-md border-b border-[#001933]"
+              className="md:hidden absolute top-full left-0 w-full bg-white backdrop-blur-md border-b border-white"
               variants={mobileMenuVariants}
               initial="hidden"
               animate="visible"
@@ -216,25 +217,49 @@ const Navbar = () => {
             >
               <div className="px-4 py-6 space-y-3">
                 {navLinks.map((link, index) => (
-                  <motion.div
-                    key={link.to + link.label + index}
-                    variants={mobileItemVariants}
-                    custom={index}
-                  >
-                    <NavLink
-                      to={link.to}
-                      className={({ isActive }) => (
-                        `block px-4 py-3 text-white font-medium transition-all duration-300 rounded-lg ${
-                          isActive
-                            ? 'bg-[#001933]/80 text-[#ff9800] border border-[#001933] hover:bg-gradient-to-r hover:from-[#ff9800] hover:to-[#ffd700] hover:bg-clip-text hover:text-transparent'
-                            : 'hover:bg-gradient-to-r hover:from-[#ff9800] hover:to-[#ffd700] hover:bg-clip-text hover:text-transparent'
-                        }`
-                      )}
-                      onClick={() => setIsMobileMenuOpen(false)}
+                  link.label === 'Our Services' ? (
+                    <motion.div
+                      key={link.to + link.label + index}
+                      variants={mobileItemVariants}
+                      custom={index}
                     >
-                      {link.label}
-                    </NavLink>
-                  </motion.div>
+                      <button
+                        className="block w-full text-left px-4 py-3 text-black font-medium transition-all duration-300 rounded-lg focus:outline-none"
+                        onClick={() => setIsMobileServicesOpen((open) => !open)}
+                      >
+                        {link.label}
+                        <span className={`ml-2 inline-block transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-90' : ''}`}>▶</span>
+                      </button>
+                      {isMobileServicesOpen && (
+                        <div className="pl-6 py-2 space-y-1">
+                          <NavLink to="/epc" className="block px-2 py-2 text-black rounded hover:bg-orange-100" onClick={() => setIsMobileMenuOpen(false)}>EPC</NavLink>
+                          <NavLink to="/om-service" className="block px-2 py-2 text-black rounded hover:bg-orange-100" onClick={() => setIsMobileMenuOpen(false)}>O&M SERVICE</NavLink>
+                          <NavLink to="/project-development" className="block px-2 py-2 text-black rounded hover:bg-orange-100" onClick={() => setIsMobileMenuOpen(false)}>PROJECT DEVELOPMENT</NavLink>
+                          <NavLink to="/hr" className="block px-2 py-2 text-black rounded hover:bg-orange-100" onClick={() => setIsMobileMenuOpen(false)}>HR</NavLink>
+                        </div>
+                      )}
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key={link.to + link.label + index}
+                      variants={mobileItemVariants}
+                      custom={index}
+                    >
+                      <NavLink
+                        to={link.to}
+                        className={({ isActive }) => (
+                          `block px-4 py-3 text-black font-medium transition-all duration-300 rounded-lg ${
+                            isActive
+                              ? 'bg-[#001933]/80 text-[#ff9800] border border-[#001933] hover:!text-orange-500 hover:bg-gradient-to-r hover:from-[#ff9800] hover:to-[#ffd700] hover:bg-clip-text hover:text-transparent'
+                              : 'hover:!text-orange-500 hover:bg-gradient-to-r hover:from-[#ff9800] hover:to-[#ffd700] hover:bg-clip-text hover:text-transparent'
+                          }`
+                        )}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {link.label}
+                      </NavLink>
+                    </motion.div>
+                  )
                 ))}
               </div>
             </motion.div>

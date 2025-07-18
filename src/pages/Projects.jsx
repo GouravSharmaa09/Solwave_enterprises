@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import EnquiryFormModal from '../components/EnquiryFormModal';
 
 const projects = [
@@ -15,18 +15,8 @@ const projects = [
 ];
 
 const Projects = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [modalProject, setModalProject] = useState(null);
-
-  const handleEnquiry = (project) => {
-    setModalProject(project);
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-    setModalProject(null);
-  };
+  // Remove modal state/logic for project cards
+  const navigate = useNavigate();
 
   return (
     <div className="py-20 bg-white min-h-screen">
@@ -52,13 +42,13 @@ const Projects = () => {
                 <div className="p-8 flex-1 flex flex-col justify-between relative z-10">
                   <div>
                     <h3 className="text-3xl font-bold text-gray-800 mb-2 font-serif">{proj.name}</h3>
-                    <p className="font-sans text-orange-600 text-lg mb-2">{proj.desc}</p>
+                    <p className="font-sans text-darkred text-lg mb-2">{proj.desc}</p>
                   </div>
                   <div className="mt-4 flex items-center justify-between">
                     <span className="inline-block px-4 py-1 rounded-full bg-green-100 text-green-700 font-bold text-sm">{proj.size}</span>
                     <button
-                      className="ml-2 px-3 py-1 rounded-full bg-orange-500 text-white font-bold border-2 border-orange-500 text-xs hover:bg-black hover:text-white hover:border-black transition-all duration-300 focus:scale-105 active:scale-95 hover:shadow-lg"
-                      onClick={e => { e.preventDefault(); e.stopPropagation(); handleEnquiry(proj); }}
+                      className="ml-2 px-3 py-1 rounded-full bg-darkred text-white font-bold border-2 border-darkred text-xs hover:bg-black hover:text-white hover:border-black transition-all duration-300 focus:scale-105 active:scale-95 hover:shadow-lg"
+                      onClick={e => { e.preventDefault(); e.stopPropagation(); navigate(`/enquiry?item=${encodeURIComponent(proj.name)}`); }}
                     >
                       Enquiry
                     </button>
@@ -70,9 +60,7 @@ const Projects = () => {
         </div>
       </div>
       {/* Modal for Enquiry Now */}
-      {showModal && (
-        <EnquiryFormModal open={showModal} onClose={closeModal} item={modalProject} />
-      )}
+      {/* The EnquiryFormModal component is no longer used for project cards */}
     </div>
   );
 };

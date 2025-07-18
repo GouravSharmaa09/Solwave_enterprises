@@ -2,6 +2,14 @@ import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
+const pnImages = [
+  '/pn1.jpg',
+  '/pn2.jpg',
+  '/pn3.jpg',
+  '/pn4.jpg',
+  '/pn5.jpg',
+  '/pn6.jpg',
+];
 const products = [
   {
     name: "Tapi R",
@@ -177,7 +185,9 @@ const fadeVariants = {
 
 const ProductDetail = () => {
   const { slug } = useParams();
-  const product = products.find((p) => p.slug === slug);
+  const productIdx = products.findIndex((p) => p.slug === slug);
+  const product = products[productIdx];
+  const pnImage = pnImages[productIdx % pnImages.length];
 
   if (!product) {
     return (
@@ -197,13 +207,19 @@ const ProductDetail = () => {
       animate="visible"
       variants={fadeVariants}
     >
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto mt-12">
         <h1 className="text-4xl md:text-5xl font-bold mb-8 text-center bg-gradient-to-r from-orange-400 to-orange-600 text-transparent bg-clip-text font-serif">{product.name}</h1>
-        <div className="flex flex-col items-center mb-10">
-          <img src={product.image} alt={product.name} className="rounded-2xl w-full max-w-2xl h-[420px] object-cover" />
+        <div className="w-full max-w-5xl h-[220px] md:h-[420px] overflow-hidden bg-white" style={{ boxShadow: 'none' }}>
+            <img
+              src={pnImage}
+              alt={product.name + ' alternate'}
+              className="w-full h-full object-contain block min-w-0 min-h-0"
+              style={{ borderRadius: 0, boxShadow: 'none' }}
+            />
         </div>
-        {/* Product Details Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+        {/* Product Details Grid and all content below image */}
+        <div className="mt-8 px-2 sm:px-4 md:px-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
           <div className="bg-orange-50 rounded-xl p-6 text-center">
             <div className="text-gray-500 text-sm font-semibold mb-1">Type</div>
             <div className="text-lg font-bold text-gray-800">{product.type}</div>
@@ -225,36 +241,37 @@ const ProductDetail = () => {
             <div className="text-lg font-bold text-gray-800">{product.cells}</div>
           </div>
         </div>
-        {/* Product Features */}
-        <div className="mb-12">
-          <h2 className="text-2xl font-bold mb-4 text-orange-600">Key Features</h2>
-          <ul className="list-disc list-inside text-gray-700 space-y-2">
-            {product.details.map((d, i) => (
-              <li key={i}>{d}</li>
-            ))}
-          </ul>
-        </div>
-        {/* Uses Steps Horizontal */}
-        <h2 className="text-2xl font-bold mb-4 text-orange-600">How to Use</h2>
-        <div className="overflow-x-auto">
-          <div className="flex gap-6 min-w-[600px]">
-            {product.uses.map((use, idx) => (
-              <motion.div
-                key={idx}
-                className="flex flex-col justify-between bg-orange-50 rounded-xl p-6 min-w-[260px] max-w-xs flex-shrink-0"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-              >
-                <div className="font-bold text-lg mb-2">{use.step}</div>
-                <div className="text-gray-700 text-base">{use.desc}</div>
-              </motion.div>
-            ))}
+          {/* Product Features */}
+          <div className="mb-12">
+            <h2 className="text-2xl font-bold mb-4 text-orange-600">Key Features</h2>
+            <ul className="list-disc list-inside text-gray-700 space-y-2">
+              {product.details.map((d, i) => (
+                <li key={i}>{d}</li>
+              ))}
+            </ul>
           </div>
-        </div>
-        <div className="mt-10 text-center">
-          <Link to="/" className="inline-block px-6 py-2 rounded-full bg-orange-500 text-white font-bold border-2 border-orange-500 transition-all duration-300 hover:bg-black hover:text-white hover:border-black focus:scale-105 active:scale-95">Back to Home</Link>
+          {/* Uses Steps Horizontal */}
+          <h2 className="text-2xl font-bold mb-4 text-orange-600">How to Use</h2>
+          <div className="overflow-x-auto">
+            <div className="flex gap-6 min-w-[600px]">
+              {product.uses.map((use, idx) => (
+                <motion.div
+                  key={idx}
+                  className="flex flex-col justify-between bg-orange-50 rounded-xl p-6 min-w-[260px] max-w-xs flex-shrink-0"
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                >
+                  <div className="font-bold text-lg mb-2">{use.step}</div>
+                  <div className="text-gray-700 text-base">{use.desc}</div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+          <div className="mt-10 text-center">
+            <Link to="/" className="inline-block px-6 py-2 rounded-full bg-orange-500 text-white font-bold border-2 border-orange-500 transition-all duration-300 hover:bg-black hover:text-white hover:border-black focus:scale-105 active:scale-95">Back to Home</Link>
+          </div>
         </div>
       </div>
     </motion.div>

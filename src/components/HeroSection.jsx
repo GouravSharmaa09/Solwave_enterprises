@@ -94,7 +94,7 @@ const HeroSection = () => {
             key={currentSlide}
           >
             <motion.div variants={textVariants}>
-              <span className="inline-block px-4 py-2 bg-orange-500 text-white text-sm font-medium rounded-full mb-4">
+              <span className="inline-block px-4 py-2 bg-darkred text-white text-sm font-medium rounded-full mb-4">
                 {slides[currentSlide].subtitle}
               </span>
             </motion.div>
@@ -118,7 +118,7 @@ const HeroSection = () => {
               variants={textVariants}
             >
               <button
-                className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                className="bg-darkred hover:bg-[#660000] text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg"
                 onClick={() => navigate('/contact')}
               >
                 Get Free Quote
@@ -185,7 +185,7 @@ const HeroSection = () => {
             onClick={() => setCurrentSlide(index)}
             className={`h-1.5 rounded-full transition-all duration-300 focus:outline-none
               ${index === currentSlide 
-                ? 'bg-orange-500/80 w-4' 
+                ? 'bg-darkred/80 w-4' 
                 : 'bg-white/30 w-1.5 hover:bg-white/60'}
             `}
           />

@@ -17,32 +17,54 @@ const socialLinks = [
 ];
 
 const Footer = () => (
-  <footer className="bg-[#001933] text-white py-10 mt-5 border-t-0">
-    <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
-      {/* Brand and tagline */}
-      <div className="flex flex-col items-center md:items-start">
-        <img src="/logo2.jpg" alt="Solwave Logo" className="h-16 w-16 rounded-full shadow-none object-cover mb-2" />
-        <span className="text-gray-400 text-sm">Empowering India with Solar Energy</span>
-        <div className="flex gap-3 mt-3">
+  <footer className="bg-[#708090] text-white py-1 border-t-0">
+    <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-start gap-8">
+      {/* Left: Logo and Description */}
+      <div className="flex-1 min-w-[220px] flex flex-col items-start">
+        <img src="/l1.png" alt="Solwave Logo" style={{ height: '8rem', width: '16rem' }} className="mb-2 rounded-full shadow-none object-cover" />
+        {/* <span className="font-bold text-xl mb-2">Solwave</span> */}
+        <p className="text-sm leading-snug mb-2">Solwave is a fully integrated solar solutions provider having wide range of solar energy products with cutting edge technology to fulfill renewable energy need of India.</p>
+      </div>
+      {/* Center: Quick Links */}
+      <div className="flex-1 min-w-[180px] flex flex-col items-start w-full">
+        <div className="font-bold mb-2 text-base text-white mt-4 w-full text-center md:text-left">Quick Links</div>
+        <ul className="flex flex-wrap gap-2 text-sm w-full justify-center md:flex-col md:gap-0 md:space-y-2 md:justify-start">
+          <li><Link to="/" className="text-black py-1 block hover:text-orange-400 hover:underline">Home</Link></li>
+          <li><Link to="/about" className="text-black py-1 block hover:text-orange-400 hover:underline">About</Link></li>
+          <li><Link to="/services" className="text-black py-1 block hover:text-orange-400 hover:underline">Services</Link></li>
+          <li><Link to="/projects" className="text-black py-1 block hover:text-orange-400 hover:underline">Projects</Link></li>
+          <li><Link to="/products" className="text-black py-1 block hover:text-orange-400 hover:underline">Products</Link></li>
+          <li><Link to="/contact" className="text-black py-1 block hover:text-orange-400 hover:underline">Contact</Link></li>
+        </ul>
+      </div>
+      {/* Right: Address, Contact, Social Icons */}
+      <div className="flex-1 min-w-[220px] flex flex-col items-start gap-2 md:pl-8">
+        <div className="font-bold mb-1 text-base text-white hidden md:block">Address</div>
+        <div className="text-sm mb-1 font-semibold hidden md:block">Registered & Corporate Office:</div>
+        <div className="text-sm mb-1 hidden md:block">near chomu puliya Johtwara Jaipur, rajasthan </div>
+        <div className="text-sm mb-1 hidden md:block">VIP Colony, Near RTO Office Nakatiya,(jaipur) 303012</div>
+        <div className="font-bold mb-1 text-base text-white mt-4">Contact</div>
+        <div className="flex items-center gap-2 text-sm"><span>📞</span> <span>+91-8209427429, </span></div>
+        <div className="flex items-center gap-2 text-sm"><span>✉️</span> <span>Info@solwave.in</span></div>
+        <div className="flex flex-row gap-3 mt-2">
           {socialLinks.map(link => (
             <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label}
-              className="bg-white/10 hover:bg-orange-500 text-white hover:text-white rounded-full p-2 transition-colors duration-200 shadow-md">
+              className="bg-white/10 hover:bg-orange-500 text-white hover:text-white rounded-full p-2 transition-colors duration-200 shadow-md w-9 h-9 flex items-center justify-center">
               {link.icon}
             </a>
           ))}
         </div>
       </div>
-      {/* Quick Links */}
-      <div className="flex flex-col md:flex-row gap-4 items-center">
-        <Link to="/" className="hover:text-orange-400 transition-colors duration-200">Home</Link>
-        <Link to="/about" className="hover:text-orange-400 transition-colors duration-200">About</Link>
-        <Link to="/services" className="hover:text-orange-400 transition-colors duration-200">Services</Link>
-        <Link to="/projects" className="hover:text-orange-400 transition-colors duration-200">Projects</Link>
-        <Link to="/contact" className="hover:text-orange-400 transition-colors duration-200">Contact</Link>
-      </div>
-      {/* Copyright */}
-      <div className="text-gray-400 text-sm text-center md:text-right">
-        &copy; {new Date().getFullYear()} Solwave. All rights reserved.
+    </div>
+    {/* Copyright and Policy Links */}
+    <div className="text-gray-200 text-xs text-center mt-4 border-t border-white/20 pt-2 flex flex-col md:flex-row justify-between items-center gap-2">
+      <span>&copy; {new Date().getFullYear()} Solwave | Design & Developed by Gourav Sharma</span>
+      <div className="flex flex-wrap gap-2 flex-row justify-center md:justify-start items-center">
+        <Link to="/privacy-policy" className="text-black hover:text-orange-400 hover:underline">Privacy Policy</Link>
+        <span className="block md:hidden text-black">|</span>
+        <Link to="/terms-and-conditions" className="text-black hover:text-orange-400 hover:underline">Terms & Conditions</Link>
+        <span className="block md:hidden text-black">|</span>
+        <Link to="/data-protection-policy" className="text-black hover:text-orange-400 hover:underline">Data Policy</Link>
       </div>
     </div>
   </footer>

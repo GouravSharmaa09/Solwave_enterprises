@@ -79,7 +79,7 @@ button:focus-visible {
 
 /* Glowing text animation for navbar logo */
 .navbar-glow {
-  filter: drop-shadow(0 0 8px rgba(255, 165, 0, 0.3));
+  filter: drop-shadow(0 0 8px rgba(153, 0, 0, 0.3));
   transition: filter 0.3s ease;
 }
 
@@ -91,7 +91,7 @@ button:focus-visible {
   left: 50%;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #ff6b35, #ffa726);
+  background: linear-gradient(90deg, #990000, #660000);
   transition: all 0.3s ease;
   transform: translateX(-50%);
 }
@@ -130,9 +130,9 @@ body, html {
 }
 .home-cta:hover, .home-cta:focus {
   transform: translateY(-2px) scale(1.04);
-  box-shadow: 0 4px 24px rgba(255,224,102,0.25), 0 2px 8px rgba(13,110,253,0.10);
-  background: #ffd700 !important;
-  color: #0d6efd !important;
+  box-shadow: 0 4px 24px rgba(153,0,0,0.25), 0 2px 8px rgba(13,110,253,0.10);
+  background: #990000 !important;
+  color: #fff !important;
 }
 
 .feature-card {
@@ -147,11 +147,11 @@ body, html {
 .testimonial-card {
   border-radius: 1.5rem;
   transition: transform 0.2s, box-shadow 0.2s;
-  background: linear-gradient(135deg, #f8fafc 60%, #ffe066 100%);
+  background: linear-gradient(135deg, #f8fafc 60%, #990000 100%);
 }
 .testimonial-card:hover {
   transform: scale(1.04) rotate(-1deg);
-  box-shadow: 0 8px 32px rgba(255,224,102,0.15), 0 2px 8px rgba(13,110,253,0.10);
+  box-shadow: 0 8px 32px rgba(153,0,0,0.15), 0 2px 8px rgba(13,110,253,0.10);
 }
 
 .stat-box {
@@ -214,4 +214,18 @@ body {
 }
 .hide-horizontal-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
+}
+
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Webkit */
+}
+
+/* Only allow horizontal pan for touch (prevents vertical scroll on swipe) */
+.touch-pan-x {
+  touch-action: pan-x;
 }
