@@ -151,6 +151,14 @@ export default function Home() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    // Set smooth scroll behavior for the whole page
+    document.documentElement.style.scrollBehavior = 'smooth';
+    return () => {
+      document.documentElement.style.scrollBehavior = '';
+    };
+  }, []);
+
   // Refs for scrolling
   const servicesScrollRef = useRef(null);
   const projectsScrollRef = useRef(null);
@@ -241,9 +249,11 @@ export default function Home() {
           productCards[productIdx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
           console.log('Product card scrolled to', productIdx);
         }
-        productTimeoutId = setTimeout(scroll, 4000);
+        const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+        productTimeoutId = setTimeout(scroll, isMobile ? 1800 : 4000);
       };
-      productTimeoutId = setTimeout(scroll, 4000);
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+      productTimeoutId = setTimeout(scroll, isMobile ? 1800 : 4000);
     };
     const stopProductScroll = () => {
       if (productTimeoutId) clearTimeout(productTimeoutId);
@@ -263,9 +273,11 @@ export default function Home() {
           serviceCards[serviceIdx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
           console.log('Service card scrolled to', serviceIdx);
         }
-        serviceTimeoutId = setTimeout(scroll, 2000);
+        const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+        serviceTimeoutId = setTimeout(scroll, isMobile ? 1200 : 2000);
       };
-      serviceTimeoutId = setTimeout(scroll, 2000);
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+      serviceTimeoutId = setTimeout(scroll, isMobile ? 1200 : 2000);
     };
     const stopServiceScroll = () => {
       if (serviceTimeoutId) clearTimeout(serviceTimeoutId);
@@ -285,9 +297,11 @@ export default function Home() {
           projectCards[projectIdx].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
           console.log('Project card scrolled to', projectIdx);
         }
-        projectTimeoutId = setTimeout(scroll, 4000); // Increased delay to 4 seconds
+        const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+        projectTimeoutId = setTimeout(scroll, isMobile ? 1800 : 4000);
       };
-      projectTimeoutId = setTimeout(scroll, 4000); // Increased delay to 4 seconds
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+      projectTimeoutId = setTimeout(scroll, isMobile ? 1800 : 4000);
     };
     const stopProjectScroll = () => {
       if (projectTimeoutId) clearTimeout(projectTimeoutId);
@@ -353,8 +367,8 @@ export default function Home() {
         <section className="py-20 bg-transparent">
             <div className="container mx-auto px-4 max-w-5xl">
               <h2 className="text-4xl md:text-5xl font-bold mb-8 text-center">
-                <span className="text-darkred">Welcome To </span>
-                <span className="text-blue-700">Solwave</span>
+                <span className="text-darkred">Welcome to Solwave </span>
+                <span className="text-blue-700">Enterprises</span>
               </h2>
               <p className="max-w-5xl text-left mx-auto text-gray-700 text-base md:text-lg leading-relaxed mb-2">
                 Solwave is a fully integrated solar solutions provider having wide range of solar energy products with cutting edge technology and industry expertise to fulfill renewable energy need of India. Headquartered at Bareilly, Solwave is a leading manufacturer of Solar Energy Systems. We supply Solar Power and Heating Systems for Households, Private users, Commercial Enterprises, Institutions, Public Facilities and Investors.
@@ -370,10 +384,11 @@ export default function Home() {
           {/* Our Products Section (Grid 2x3) */}
           <section className="py-20 bg-transparent">
             <div className="container mx-auto px-2 sm:px-4">
-              <h2 className="text-5xl font-bold text-gray-800 mb-16 text-center">Our Products</h2>
+              <h2 className="text-5xl font-bold text-darkred mb-16 text-center">Our Products</h2>
               <div
                 ref={productsScrollRef}
-                className="flex overflow-x-auto gap-4 md:grid md:grid-cols-3 md:gap-6 max-w-7xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x"
+                className="flex overflow-x-auto overflow-y-hidden gap-4 md:grid md:grid-cols-3 md:gap-6 max-w-7xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x"
+                style={{ scrollBehavior: 'smooth' }}
               >
                 <AnimatePresence>
                   {products6.map((prod, idx) => (
@@ -432,10 +447,11 @@ export default function Home() {
           {/* Our Services Section (Grid) */}
           <section className="py-20 bg-transparent">
             <div className="container mx-auto px-2 sm:px-4">
-              <h2 className="text-5xl font-bold text-gray-800 mb-16 text-center">Our Services</h2>
+              <h2 className="text-5xl font-bold text-darkred mb-16 text-center">Our Services</h2>
               <div
                 ref={servicesScrollRef}
-                className="flex overflow-x-auto gap-4 md:grid md:grid-cols-3 md:gap-6 max-w-7xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x"
+                className="flex overflow-x-auto overflow-y-hidden gap-4 md:grid md:grid-cols-3 md:gap-6 max-w-7xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x"
+                style={{ scrollBehavior: 'smooth' }}
                 onMouseEnter={() => setServicePaused(true)}
                 onMouseLeave={() => setServicePaused(false)}
                 onTouchStart={() => setServicePaused(true)}
@@ -447,7 +463,7 @@ export default function Home() {
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: false, amount: 0.2 }}
-                    transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
+                    transition={{ duration: 0.3, delay: idx * 0.05, ease: "easeOut" }}
                     className="group bg-white border border-gray-100 overflow-hidden flex flex-col w-[85vw] min-w-[85vw] max-w-[85vw] h-[320px] relative rounded-none shadow-md md:w-full md:min-w-0 md:max-w-none snap-center"
                   >
                     <div className="w-full h-32 sm:h-40 bg-gray-100" style={{
@@ -468,16 +484,17 @@ export default function Home() {
           {/* Our Projects Section (Grid) */}
           <section className="py-20 bg-transparent">
             <div className="container mx-auto px-2 sm:px-4">
-              <h2 className="text-5xl font-bold text-gray-800 mb-16 text-center">Our Projects</h2>
+              <h2 className="text-5xl font-bold text-darkred mb-16 text-center">Our Projects</h2>
               <div
                 ref={projectsScrollRef}
-                className="flex overflow-x-auto gap-4 md:grid md:grid-cols-3 md:gap-6 max-w-7xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x"
+                className="flex overflow-x-auto overflow-y-hidden gap-4 md:grid md:grid-cols-3 md:gap-6 max-w-7xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x"
+                style={{ scrollBehavior: 'smooth' }}
               >
                 {projects.map((proj, idx) => (
                   <Link
                     to={`/projects/${proj.slug}`}
                     key={proj.name + idx}
-                    className="group bg-white rounded-none border border-gray-100 overflow-hidden flex flex-col w-[90vw] min-w-[90vw] max-w-[90vw] h-[380px] relative shadow-md transition-transform duration-300 hover:-translate-y-2 hover:scale-105 hover:shadow-xl cursor-pointer flex-shrink-0 md:w-full md:min-w-0 md:max-w-none snap-center"
+                    className="group bg-white rounded-none border border-gray-100 overflow-hidden flex flex-col w-[90vw] min-w-[90vw] max-w-[90vw] h-[380px] relative shadow-md transition-transform duration-200 hover:-translate-y-2 hover:scale-105 hover:shadow-xl cursor-pointer flex-shrink-0 md:w-full md:min-w-0 md:max-w-none snap-center"
                     style={{ textDecoration: 'none' }}
                     onMouseEnter={() => setProjectPaused(true)}
                     onMouseLeave={() => setProjectPaused(false)}
@@ -506,7 +523,7 @@ export default function Home() {
                     }}
                   >
                     <div
-                      className="w-full h-32 sm:h-48 bg-gray-100 transition-transform duration-500 group-hover:-translate-x-4"
+                      className="w-full h-32 sm:h-48 bg-gray-100 transition-transform duration-200 group-hover:-translate-x-4"
                       style={{
                         backgroundImage: `url(${proj.img})`,
                         backgroundPosition: 'center',
@@ -514,7 +531,7 @@ export default function Home() {
                         backgroundSize: 'cover',
                       }}
                     />
-                    <div className="p-4 sm:p-6 md:p-8 flex-1 flex flex-col justify-start relative z-10 transition-transform duration-500 group-hover:translate-x-4">
+                    <div className="p-4 sm:p-6 md:p-8 flex-1 flex flex-col justify-start relative z-10 transition-transform duration-200 group-hover:translate-x-4">
                       <h3 className="text-lg md:text-2xl font-bold text-gray-800 mb-2 font-serif">{proj.name}</h3>
                       <p className="font-sans text-darkred text-sm md:text-base mb-2">{proj.desc}</p>
                       <div className="mt-2 flex items-center justify-between">
@@ -528,6 +545,87 @@ export default function Home() {
                       </div>
                     </div>
                   </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Reviews by Clients Section */}
+          <section className="py-20 bg-transparent">
+            <div className="container mx-auto px-2 sm:px-4">
+              <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-darkred">Reviews by Clients</h2>
+              <div className="flex overflow-x-auto overflow-y-hidden gap-6 max-w-5xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x" style={{ scrollBehavior: 'smooth' }}>
+                {[
+                  { name: 'Amit Sharma', review: 'Excellent service and top quality solar panels. Highly recommended!', location: 'Jaipur, Rajasthan', rating: 5 },
+                  { name: 'Priya Verma', review: 'Very professional team, smooth installation process.', location: 'Delhi', rating: 4 },
+                  { name: 'Rahul Singh', review: 'Affordable and reliable solar solutions. Happy with the results!', location: 'Lucknow, UP', rating: 5 },
+                  { name: 'Sunita Mehra', review: 'Customer support was very responsive and helpful.', location: 'Indore, MP', rating: 4 },
+                  { name: 'Vikas Jain', review: 'Great experience from start to finish. Will recommend to others.', location: 'Ahmedabad, Gujarat', rating: 5 },
+                ].map((client, idx) => (
+                  <div key={idx} className="min-w-[320px] max-w-xs bg-white rounded-2xl shadow-lg p-6 flex flex-col justify-between snap-center">
+                    <div className="flex items-center mb-3">
+                      <div className="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-2xl font-bold text-darkred mr-3">
+                        {client.name[0]}
+                      </div>
+                      <div>
+                        <div className="font-bold text-lg text-gray-800">{client.name}</div>
+                        <div className="text-xs text-gray-500">{client.location}</div>
+                      </div>
+                    </div>
+                    <div className="text-gray-700 text-base mb-4">"{client.review}"</div>
+                    <div className="flex items-center gap-1">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <span key={i} className={i < client.rating ? 'text-yellow-400' : 'text-gray-300'}>★</span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Marketing with Solwave Enterprises Section */}
+          <section className="py-20 bg-transparent">
+            <div className="container mx-auto px-2 sm:px-4">
+              <h2 className="text-4xl md:text-5xl font-bold text-center mb-12">
+                <span className="text-darkred">Marketing with Solwave </span>
+                <span className="text-blue-700">Enterprises</span>
+              </h2>
+              <div className="flex overflow-x-auto overflow-y-hidden gap-6 max-w-5xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x" style={{ scrollBehavior: 'smooth' }}>
+                {[
+                  {
+                    banner: '/m1.jpeg',
+                    detail: 'Join our marketing team and help us spread solar awareness across India. We offer great incentives and a dynamic work environment.',
+                    member: { name: 'Gourav Sharma', img: '/g.jpg' }
+                  },
+                  {
+                    banner: '/m2.jpeg',
+                    detail: 'Our marketing experts collaborate with partners to deliver innovative solar solutions and reach new markets.',
+                    member: { name: 'Priya Saini', img: '/pn2.jpg' }
+                  },
+                  {
+                    banner: '/m3.jpeg',
+                    detail: 'Be a part of our mission to make solar energy accessible and affordable for everyone.',
+                    member: { name: 'Rahul Meena', img: '/pn3.jpg' }
+                  },
+                  {
+                    banner: '/m4.jpeg',
+                    detail: 'We believe in teamwork and creativity. Join us to make a real impact in the renewable energy sector.',
+                    member: { name: 'Sunita Kumari', img: '/pn4.jpg' }
+                  },
+                ].map((item, idx) => (
+                  <div key={idx} className="min-w-[340px] max-w-sm bg-white rounded-2xl shadow-xl p-0 flex flex-col snap-center overflow-hidden">
+                    <div className="w-full h-40 bg-white flex items-center justify-center rounded-t-2xl overflow-hidden">
+                      <img src={item.banner} alt="Marketing Banner" className="max-h-full max-w-full object-contain" />
+                    </div>
+                    <div className="flex-1 flex flex-col justify-between p-6">
+                      <div className="text-gray-800 text-base mb-4">{item.detail}</div>
+                      <div className="flex items-center mt-4">
+                        <img src={item.member.img} alt={item.member.name} className="w-12 h-12 rounded-full object-cover border-2 border-orange-400 mr-3" />
+                        <div className="font-bold text-lg text-darkred">{item.member.name}</div>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>

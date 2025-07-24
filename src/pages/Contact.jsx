@@ -5,14 +5,10 @@ import ChatBotWidget from '../components/ChatBotWidget';
 const COMPANY_INFO = {
   headOffice: {
     title: 'Head Office',
-    address: 'Near Raza Masjid Post Padarathpur Bareilly (U.P) 243123',
+    address: '64, suraj marg, Maa Hinglaj Nagar, Lalarpura, Jaipur, Rajasthan 302021',
   },
-  branchOffice: {
-    title: 'Branch Office',
-    address: 'VIP Colony, Near RTO Office Nakatiya, Bareilly (U.P.) 243123',
-  },
-  email: 'Info@solwave.in',
-  phone: ['+91-8755984565', '6396224405'],
+  email: 'info@solwaveenterprises.com',
+  phone: ['9887005337'],
   hours: '24 HOUR WITH YOU',
 };
 
@@ -110,8 +106,6 @@ const Contact = ({ product, onClose }) => {
             <div className="mb-6">
               <div className="font-bold text-gray-700 mb-1">{COMPANY_INFO.headOffice.title}</div>
               <div className="text-gray-600 mb-3">{COMPANY_INFO.headOffice.address}</div>
-              <div className="font-bold text-gray-700 mb-1">{COMPANY_INFO.branchOffice.title}</div>
-              <div className="text-gray-600 mb-3">{COMPANY_INFO.branchOffice.address}</div>
             </div>
             <div className="mb-4">
               <div className="font-bold text-gray-700 mb-1">Email Us</div>
@@ -128,6 +122,20 @@ const Contact = ({ product, onClose }) => {
           </div>
         </div>
       </motion.div>
+      {/* Google Map Section */}
+      <div className="w-full mt-8 overflow-hidden" style={{ borderRadius: 0 }}>
+        <iframe
+          title="Solwave Location Map"
+          src="https://www.google.com/maps?q=64,+suraj+marg,+Maa+Hinglaj+Nagar,+Lalarpura,+Jaipur,+Rajasthan+302021&output=embed"
+          width="100%"
+          height="420"
+          style={{ border: 0, borderRadius: 0 }}
+          allowFullScreen=""
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          className="w-full h-[420px] border-0"
+        ></iframe>
+      </div>
       <ChatBotWidget />
     </>
   );

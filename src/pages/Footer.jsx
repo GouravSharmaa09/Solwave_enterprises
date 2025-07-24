@@ -26,26 +26,38 @@ const Footer = () => (
         <p className="text-sm leading-snug mb-2">Solwave is a fully integrated solar solutions provider having wide range of solar energy products with cutting edge technology to fulfill renewable energy need of India.</p>
       </div>
       {/* Center: Quick Links */}
-      <div className="flex-1 min-w-[180px] flex flex-col items-start w-full">
-        <div className="font-bold mb-2 text-base text-white mt-4 w-full text-center md:text-left">Quick Links</div>
-        <ul className="flex flex-wrap gap-2 text-sm w-full justify-center md:flex-col md:gap-0 md:space-y-2 md:justify-start">
-          <li><Link to="/" className="text-black py-1 block hover:text-orange-400 hover:underline">Home</Link></li>
-          <li><Link to="/about" className="text-black py-1 block hover:text-orange-400 hover:underline">About</Link></li>
-          <li><Link to="/services" className="text-black py-1 block hover:text-orange-400 hover:underline">Services</Link></li>
-          <li><Link to="/projects" className="text-black py-1 block hover:text-orange-400 hover:underline">Projects</Link></li>
-          <li><Link to="/products" className="text-black py-1 block hover:text-orange-400 hover:underline">Products</Link></li>
-          <li><Link to="/contact" className="text-black py-1 block hover:text-orange-400 hover:underline">Contact</Link></li>
-        </ul>
+      <div className="flex-1 min-w-[180px] w-full mt-6">
+        <div className="flex flex-row md:flex-col w-full md:w-auto md:items-start md:gap-8">
+          {/* Quick Links Section */}
+          <ul className="flex flex-col gap-2 text-sm w-1/2 md:w-full justify-center md:gap-0 md:space-y-2 md:justify-start md:w-auto">
+            <li className="block md:hidden text-white font-bold text-base mb-2 py-1">Quick Links</li>
+            <li className="hidden md:block text-white font-bold text-base mb-2 py-1">Quick Links</li>
+            <li><Link to="/" className="text-black py-1 block hover:text-orange-400 hover:underline">Home</Link></li>
+            <li><Link to="/about" className="text-black py-1 block hover:text-orange-400 hover:underline">About</Link></li>
+            <li><Link to="/projects" className="text-black py-1 block hover:text-orange-400 hover:underline">Projects</Link></li>
+            <li><Link to="/products" className="text-black py-1 block hover:text-orange-400 hover:underline">Products</Link></li>
+            <li><Link to="/contact" className="text-black py-1 block hover:text-orange-400 hover:underline">Contact</Link></li>
+          </ul>
+          {/* Our Services Section (visible on all screens, side by side on mobile) */}
+          <ul className="flex flex-col gap-2 text-sm w-1/2 md:w-full justify-center md:gap-0 md:space-y-2 md:justify-start md:w-auto md:pl-4">
+            <li className="block md:hidden text-white font-bold text-base mb-2 py-1">Our Services</li>
+            <li className="hidden md:block text-white font-bold text-base mb-2 py-1">Our Services</li>
+            <li><Link to="/epc" className="text-black mb-2 py-1 block hover:text-orange-400 hover:underline">EPC</Link></li>
+            <li><Link to="/om-service" className="text-black mb-2 py-1 block hover:text-orange-400 hover:underline">O&M SERVICE</Link></li>
+            <li><Link to="/project-development" className="text-black mb-2 py-1 block hover:text-orange-400 hover:underline">PROJECT DEVELOPMENT</Link></li>
+            <li><Link to="/hr" className="text-black mb-2 py-1 block hover:text-orange-400 hover:underline">HR</Link></li>
+          </ul>
+        </div>
       </div>
       {/* Right: Address, Contact, Social Icons */}
-      <div className="flex-1 min-w-[220px] flex flex-col items-start gap-2 md:pl-8">
+      <div className="flex-1 min-w-[220px] flex flex-col items-start gap-2 md:pl-8 mt-6">
         <div className="font-bold mb-1 text-base text-white hidden md:block">Address</div>
         <div className="text-sm mb-1 font-semibold hidden md:block">Registered & Corporate Office:</div>
-        <div className="text-sm mb-1 hidden md:block">near chomu puliya Johtwara Jaipur, rajasthan </div>
-        <div className="text-sm mb-1 hidden md:block">VIP Colony, Near RTO Office Nakatiya,(jaipur) 303012</div>
+        <div className="text-sm mb-1 hidden md:block">64, suraj marg, Maa Hinglaj Nagar, Lalarpura, Jaipur, Rajasthan 302021</div>
+        {/* <div className="text-sm mb-1 hidden md:block">VIP Colony, Near RTO Office Nakatiya,(jaipur) 303012</div> */}
         <div className="font-bold mb-1 text-base text-white mt-4">Contact</div>
-        <div className="flex items-center gap-2 text-sm"><span>📞</span> <span>+91-8209427429, </span></div>
-        <div className="flex items-center gap-2 text-sm"><span>✉️</span> <span>Info@solwave.in</span></div>
+        <div className="flex items-center gap-2 text-sm"><span>📞</span> <span>9887005337</span></div>
+        <div className="flex items-center gap-2 text-sm"><span>✉️</span> <span>info@solwaveenterprises.com</span></div>
         <div className="flex flex-row gap-3 mt-2">
           {socialLinks.map(link => (
             <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label}

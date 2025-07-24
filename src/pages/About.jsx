@@ -17,7 +17,10 @@ const About = () => (
     </div>
     {/* Heading and Paragraphs */}
     <div className="max-w-4xl mx-auto px-4 py-12 md:py-20 text-center">
-      <h2 className="text-4xl md:text-5xl font-bold mb-8 text-center bg-gradient-to-r from-darkred to-[#660000] text-transparent bg-clip-text">Welcome To Solwave</h2>
+      <h1 className="text-5xl font-bold mb-8 text-center">
+        <span className="text-darkred">Welcome to Solwave </span>
+        <span className="text-blue-700">Enterprises</span>
+      </h1>
       <p className="text-lg md:text-xl text-gray-700 mb-6 leading-relaxed font-medium font-sans">
         {aboutText1}
       </p>

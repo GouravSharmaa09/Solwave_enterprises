@@ -8,11 +8,9 @@ function useQuery() {
 
 const SOLWAVE_ADDRESS = {
   head: 'Head Office',
-  address: 'Near Raza Masjid Post Padarathpur Bareilly (U.P) 243123',
-  branch: 'Branch Office',
-  branchAddress: 'VIP Colony, Near RTO Office Nakatiya, Bareilly (U.P.) 243123',
-  email: 'Info@solwave.in',
-  phone: ['+91-8755984565', '6396224405'],
+  address: '64, suraj marg, Maa Hinglaj Nagar, Lalarpura, Jaipur, Rajasthan 302021',
+  email: 'info@solwaveenterprises.com',
+  phone: ['9887005337'],
   hours: '24 HOUR WITH YOU',
 };
 
@@ -128,8 +126,6 @@ const Enquiry = () => {
             <div className="text-gray-700 text-base mb-2 w-full">
               <div className="mb-1 font-semibold">{SOLWAVE_ADDRESS.head}</div>
               <div className="mb-2">{SOLWAVE_ADDRESS.address}</div>
-              <div className="mb-1 font-semibold">{SOLWAVE_ADDRESS.branch}</div>
-              <div className="mb-2">{SOLWAVE_ADDRESS.branchAddress}</div>
               <div className="mb-1 font-semibold">Email</div>
               <div className="mb-2"><a href={`mailto:${SOLWAVE_ADDRESS.email}`} className="text-darkred hover:underline">{SOLWAVE_ADDRESS.email}</a></div>
               <div className="mb-1 font-semibold">Phone</div>

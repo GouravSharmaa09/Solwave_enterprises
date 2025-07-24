@@ -94,6 +94,16 @@ const Navbar = () => {
     }
   };
 
+  // Restore scroll when menu closes
+  useEffect(() => {
+    if (!isMobileMenuOpen && typeof window !== 'undefined' && document) {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
   return (
     <motion.nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
@@ -208,61 +218,88 @@ const Navbar = () => {
         {/* Mobile Menu */}
         <AnimatePresence>
           {isMobileMenuOpen && (
-            <motion.div
-              className="md:hidden absolute top-full left-0 w-full bg-white backdrop-blur-md border-b border-white"
-              variants={mobileMenuVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-            >
-              <div className="px-4 py-6 space-y-3">
-                {navLinks.map((link, index) => (
-                  link.label === 'Our Services' ? (
-                    <motion.div
-                      key={link.to + link.label + index}
-                      variants={mobileItemVariants}
-                      custom={index}
-                    >
-                      <button
-                        className="block w-full text-left px-4 py-3 text-black font-medium transition-all duration-300 rounded-lg focus:outline-none"
-                        onClick={() => setIsMobileServicesOpen((open) => !open)}
-                      >
-                        {link.label}
-                        <span className={`ml-2 inline-block transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-90' : ''}`}>▶</span>
-                      </button>
-                      {isMobileServicesOpen && (
-                        <div className="pl-6 py-2 space-y-1">
-                          <NavLink to="/epc" className="block px-2 py-2 text-black rounded hover:bg-orange-100" onClick={() => setIsMobileMenuOpen(false)}>EPC</NavLink>
-                          <NavLink to="/om-service" className="block px-2 py-2 text-black rounded hover:bg-orange-100" onClick={() => setIsMobileMenuOpen(false)}>O&M SERVICE</NavLink>
-                          <NavLink to="/project-development" className="block px-2 py-2 text-black rounded hover:bg-orange-100" onClick={() => setIsMobileMenuOpen(false)}>PROJECT DEVELOPMENT</NavLink>
-                          <NavLink to="/hr" className="block px-2 py-2 text-black rounded hover:bg-orange-100" onClick={() => setIsMobileMenuOpen(false)}>HR</NavLink>
-                        </div>
-                      )}
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key={link.to + link.label + index}
-                      variants={mobileItemVariants}
-                      custom={index}
-                    >
-                      <NavLink
-                        to={link.to}
-                        className={({ isActive }) => (
-                          `block px-4 py-3 text-black font-medium transition-all duration-300 rounded-lg ${
-                            isActive
-                              ? 'bg-[#001933]/80 text-[#ff9800] border border-[#001933] hover:!text-orange-500 hover:bg-gradient-to-r hover:from-[#ff9800] hover:to-[#ffd700] hover:bg-clip-text hover:text-transparent'
-                              : 'hover:!text-orange-500 hover:bg-gradient-to-r hover:from-[#ff9800] hover:to-[#ffd700] hover:bg-clip-text hover:text-transparent'
-                          }`
-                        )}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        {link.label}
-                      </NavLink>
-                    </motion.div>
-                  )
-                ))}
-              </div>
-            </motion.div>
+            <>
+              {/* Prevent background scroll when menu is open */}
+              {typeof window !== 'undefined' && document && (document.body.style.overflow = 'hidden')}
+              {/* Overlay */}
+              <motion.div
+                className="fixed inset-0 z-40 bg-black/40"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsMobileMenuOpen(false)}
+              />
+              {/* Sidebar Card */}
+              <motion.div
+                className="md:hidden fixed top-0 left-0 h-full w-[65vw] min-w-[260px] max-w-[440px] z-50 flex flex-col"
+                variants={{
+                  hidden: { x: '-100%' },
+                  visible: { x: 0, transition: { type: 'spring', stiffness: 300, damping: 30 } },
+                  exit: { x: '-100%', transition: { type: 'spring', stiffness: 300, damping: 30 } }
+                }}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <div className="relative h-full w-full flex flex-col bg-transparent p-0 m-0">
+                  <button
+                    className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 hover:bg-orange-100 text-black text-2xl z-50 shadow"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    aria-label="Close menu"
+                  >
+                    &times;
+                  </button>
+                  <div className="flex-1 flex flex-col items-stretch p-0 m-0">
+                     <div className="bg-white shadow-xl w-full h-full min-h-screen flex flex-col justify-start px-0 py-0" style={{ borderRadius: 0 }}>
+                       <nav className="flex flex-col w-full pt-16 pb-8 px-6 space-y-4">
+                        {navLinks.map((link, index) => (
+                          <motion.div
+                            key={link.to + link.label + index}
+                            variants={mobileItemVariants}
+                            custom={index}
+                            className="w-full"
+                          >
+                            {link.label === 'Our Services' ? (
+                              <>
+                                <button
+                                  className="block w-full text-left px-0 py-3 text-base text-black font-semibold transition-all duration-300 focus:outline-none bg-transparent hover:text-orange-500"
+                                  onClick={() => setIsMobileServicesOpen((open) => !open)}
+                                >
+                                  {link.label}
+                                  <span className={`ml-2 inline-block transition-transform duration-200 ${isMobileServicesOpen ? 'rotate-90' : ''}`}>▶</span>
+                                </button>
+                                {isMobileServicesOpen && (
+                                  <div className="pl-4 flex flex-col gap-1">
+                                    <NavLink to="/epc" className="block w-full px-0 py-2 text-base text-black font-normal bg-transparent hover:text-orange-500" onClick={() => setIsMobileMenuOpen(false)}>EPC</NavLink>
+                                    <NavLink to="/om-service" className="block w-full px-0 py-2 text-base text-black font-normal bg-transparent hover:text-orange-500" onClick={() => setIsMobileMenuOpen(false)}>O&M SERVICE</NavLink>
+                                    <NavLink to="/project-development" className="block w-full px-0 py-2 text-base text-black font-normal bg-transparent hover:text-orange-500" onClick={() => setIsMobileMenuOpen(false)}>PROJECT DEVELOPMENT</NavLink>
+                                    <NavLink to="/hr" className="block w-full px-0 py-2 text-base text-black font-normal bg-transparent hover:text-orange-500" onClick={() => setIsMobileMenuOpen(false)}>HR</NavLink>
+                                  </div>
+                                )}
+                              </>
+                            ) : (
+                              <NavLink
+                                to={link.to}
+                                className={({ isActive }) => (
+                                  `block w-full px-0 py-3 text-base text-black font-semibold transition-all duration-300 bg-transparent text-left ${
+                                    isActive
+                                      ? 'text-[#ff9800] underline'
+                                      : 'hover:text-orange-500'
+                                  }`
+                                )}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                              >
+                                {link.label}
+                              </NavLink>
+                            )}
+                          </motion.div>
+                        ))}
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </>
           )}
         </AnimatePresence>
       </div>
