@@ -387,7 +387,7 @@ export default function Home() {
               <h2 className="text-5xl font-bold text-darkred mb-16 text-center">Our Products</h2>
               <div
                 ref={productsScrollRef}
-                className="flex overflow-x-auto overflow-y-hidden gap-4 md:grid md:grid-cols-3 md:gap-6 max-w-7xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x"
+                className="flex overflow-x-auto overflow-y-hidden gap-4 md:grid md:grid-cols-3 md:gap-6 max-w-7xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x horizontal-scroll scroll-container"
                 style={{ scrollBehavior: 'smooth' }}
               >
                 <AnimatePresence>
@@ -450,7 +450,7 @@ export default function Home() {
               <h2 className="text-5xl font-bold text-darkred mb-16 text-center">Our Services</h2>
               <div
                 ref={servicesScrollRef}
-                className="flex overflow-x-auto overflow-y-hidden gap-4 md:grid md:grid-cols-3 md:gap-6 max-w-7xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x"
+                className="flex overflow-x-auto overflow-y-hidden gap-4 md:grid md:grid-cols-3 md:gap-6 max-w-7xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x horizontal-scroll scroll-container"
                 style={{ scrollBehavior: 'smooth' }}
                 onMouseEnter={() => setServicePaused(true)}
                 onMouseLeave={() => setServicePaused(false)}
@@ -487,7 +487,7 @@ export default function Home() {
               <h2 className="text-5xl font-bold text-darkred mb-16 text-center">Our Projects</h2>
               <div
                 ref={projectsScrollRef}
-                className="flex overflow-x-auto overflow-y-hidden gap-4 md:grid md:grid-cols-3 md:gap-6 max-w-7xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x"
+                className="flex overflow-x-auto overflow-y-hidden gap-4 md:grid md:grid-cols-3 md:gap-6 max-w-7xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x horizontal-scroll scroll-container"
                 style={{ scrollBehavior: 'smooth' }}
               >
                 {projects.map((proj, idx) => (
@@ -554,7 +554,7 @@ export default function Home() {
           <section className="py-20 bg-transparent">
             <div className="container mx-auto px-2 sm:px-4">
               <h2 className="text-4xl md:text-5xl font-bold text-center mb-12 text-darkred">Reviews by Clients</h2>
-              <div className="flex overflow-x-auto overflow-y-hidden gap-6 max-w-5xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x" style={{ scrollBehavior: 'smooth' }}>
+              <div className="flex overflow-x-auto overflow-y-hidden gap-6 max-w-5xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x horizontal-scroll scroll-container" style={{ scrollBehavior: 'smooth' }}>
                 {[
                   { name: 'Amit Sharma', review: 'Excellent service and top quality solar panels. Highly recommended!', location: 'Jaipur, Rajasthan', rating: 5 },
                   { name: 'Priya Verma', review: 'Very professional team, smooth installation process.', location: 'Delhi', rating: 4 },
@@ -591,7 +591,7 @@ export default function Home() {
                 <span className="text-darkred">Marketing with Solwave </span>
                 <span className="text-blue-700">Enterprises</span>
               </h2>
-              <div className="flex overflow-x-auto overflow-y-hidden gap-6 max-w-5xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x" style={{ scrollBehavior: 'smooth' }}>
+              <div className="flex overflow-x-auto overflow-y-hidden gap-6 max-w-5xl mx-auto scrollbar-hide snap-x snap-mandatory touch-pan-x horizontal-scroll scroll-container" style={{ scrollBehavior: 'smooth' }}>
                 {[
                   {
                     banner: '/m1.jpeg',

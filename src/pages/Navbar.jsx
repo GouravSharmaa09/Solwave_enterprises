@@ -177,7 +177,7 @@ const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="md:hidden relative w-10 h-10 flex items-center justify-center text-white"
+            className="md:hidden relative w-10 h-10 flex items-center justify-center"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             variants={navItemVariants}
             whileHover={{ scale: 1.05 }}
@@ -188,7 +188,7 @@ const Navbar = () => {
               animate={isMobileMenuOpen ? "open" : "closed"}
             >
               <motion.span
-                className="w-6 h-0.5 bg-white block"
+                className="w-6 h-0.5 bg-black block"
                 variants={{
                   closed: { rotate: 0, y: 0 },
                   open: { rotate: 45, y: 6 }
@@ -196,7 +196,7 @@ const Navbar = () => {
                 transition={{ duration: 0.3 }}
               />
               <motion.span
-                className="w-6 h-0.5 bg-white block mt-1.5"
+                className="w-6 h-0.5 bg-black block mt-1.5"
                 variants={{
                   closed: { opacity: 1 },
                   open: { opacity: 0 }
@@ -204,7 +204,7 @@ const Navbar = () => {
                 transition={{ duration: 0.3 }}
               />
               <motion.span
-                className="w-6 h-0.5 bg-white block mt-1.5"
+                className="w-6 h-0.5 bg-black block mt-1.5"
                 variants={{
                   closed: { rotate: 0, y: 0 },
                   open: { rotate: -45, y: -6 }

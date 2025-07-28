@@ -252,7 +252,7 @@ const ProductDetail = () => {
           </div>
           {/* Uses Steps Horizontal */}
           <h2 className="text-2xl font-bold mb-4 text-orange-600">How to Use</h2>
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto horizontal-scroll scroll-container">
             <div className="flex gap-6 min-w-[600px]">
               {product.uses.map((use, idx) => (
                 <motion.div

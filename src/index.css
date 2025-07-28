@@ -199,12 +199,67 @@ html, body, #root {
   width: 100vw;
   min-height: 100vh;
   background: #f8fafc;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Body adjustments for fixed navbar */
 body {
   padding-top: 0 !important; /* Remove top padding since navbar is now transparent initially */
   overflow-x: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Smooth scrolling for all elements */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Remove linear motion and ensure smooth transitions */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Ensure smooth scrolling on all devices */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Smooth scrolling for all scrollable containers */
+.scroll-container {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Remove any linear transitions and ensure smooth motion */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Ensure smooth scrolling for horizontal scroll containers */
+.horizontal-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+
+/* Prevent any linear motion in animations */
+@keyframes smoothScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* Ensure all scroll animations are smooth */
+.scroll-animation {
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 /* Hide horizontal scrollbar utility */
